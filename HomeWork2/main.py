@@ -1,6 +1,6 @@
 import os
-from flask import Flask, request, jsonify, render_template
 import db
+from flask import Flask, request, jsonify, render_template
 
 
 def create_app():
@@ -31,7 +31,6 @@ def create_app():
         """
         Get query for showing all hairdressers of salon
         """
-        print(id)
         result = db.select_hairdressers(id)
         if result:
             return jsonify(result)
@@ -43,8 +42,8 @@ def create_app():
         """
         Post query for sending review on hairdresser in salon
         """
-        text = request.data
-        db.insert_review(id, h_id, text)
+        text = request.json
+        db.insert_review(id, h_id, text["text"])
         return "Success sending review"
 
     @app.route("/hairdressingSalonsSPB/salons/<id>/<h_id>", methods=["GET"])
@@ -67,7 +66,7 @@ def main():
         db.create_db()
         db.insert_data()
     app = create_app()
-    app.run(host="0.0.0.0", port=82)
+    app.run(host="0.0.0.0", port=80)
 
 
 if __name__ == "__main__":

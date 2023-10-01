@@ -17,18 +17,15 @@ def create_db():
         "name TEXT, rating REAL, region TEXT)"
     )
     connection.commit()
-    print("Created salons table")
     cursor.execute(
         """CREATE TABLE IF NOT EXISTS hairdressers(id INTEGER PRIMARY KEY,
         salon_id INTEGER, name TEXT, rating REAL)"""
     )
     connection.commit()
-    print("Created hairdressers table")
     cursor.execute(
         """CREATE TABLE IF NOT EXISTS reviews(id INTEGER PRIMARY KEY,
         salon_id INTEGER, hairdresser_id INTEGER, text TEXT) """
     )
-    print("Created hairdressers table")
     connection.commit()
     connection.close()
 
@@ -136,7 +133,7 @@ def select_reviews(id_salon: int, id_hairdresser: int):
 
     reviews = []
     for i in cursor.fetchall():
-        reviews.append(i)
+        reviews.append(i[0])
     return reviews
 
 
@@ -147,7 +144,7 @@ def max_id_reviews():
 
     ids = []
     for i in cursor.fetchall():
-        ids.append(i)
+        ids.append(i[0])
 
     return max(ids)
 
@@ -160,3 +157,5 @@ def insert_review(id_salon: int, id_hairdresser: int, text: str):
         "INSERT INTO reviews (id, salon_id, hairdresser_id, text) VALUES (?, ?, ?, ?);",
         (max_id + 1, id_salon, id_hairdresser, text),
     )
+    connection.commit()
+    cursor.close()
