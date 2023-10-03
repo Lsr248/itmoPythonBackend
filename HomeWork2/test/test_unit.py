@@ -1,8 +1,10 @@
-import sqlite3
-import pytest
-import tempfile
 import json
-from HomeWork2.helpers.db import init_db, insert_data, select_salons, insert_review
+import sqlite3
+import tempfile
+
+import pytest
+
+from HomeWork2.helpers.db import init_db, insert_data, insert_review, select_salons
 
 db_fd, db_path = tempfile.mkstemp()
 init_db(db_path)

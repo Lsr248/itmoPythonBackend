@@ -1,6 +1,5 @@
 import os
 import tempfile
-
 import pytest
 from HomeWork2.helpers.creator import create_app
 from HomeWork2.helpers.db import init_db, insert_data
