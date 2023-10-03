@@ -1,17 +1,18 @@
 import sqlite3
 from collections import namedtuple
 
-db_path = "database.sqlite"
 Salon = namedtuple("Salon", "name, rating, region")
 
 
-def create_db():
-    """
-    Function for creating all tables
-    """
+def get_db(db_path=None):
     connection = sqlite3.connect(db_path)
-    cursor = connection.cursor()
 
+    return connection
+
+
+def init_db(db_path=None):
+    connection = get_db(db_path)
+    cursor = connection.cursor()
     cursor.execute(
         "CREATE TABLE IF NOT EXISTS salons (id INTEGER PRIMARY KEY, "
         "name TEXT, rating REAL, region TEXT)"
@@ -27,14 +28,13 @@ def create_db():
         salon_id INTEGER, hairdresser_id INTEGER, text TEXT) """
     )
     connection.commit()
-    connection.close()
 
 
-def insert_data():
+def insert_data(db_path=None):
     """
     Function for inserting all data
     """
-    connection = sqlite3.connect(db_path)
+    connection = get_db(db_path)
     cursor = connection.cursor()
 
     cursor.execute(
@@ -80,7 +80,7 @@ def insert_data():
     connection.close()
 
 
-def select_salons(rating: int, region: str):
+def select_salons(rating: float, region: str, db_path):
     connection = sqlite3.connect(db_path)
     cursor = connection.cursor()
     salons = []
@@ -103,7 +103,7 @@ def select_salons(rating: int, region: str):
     return salons
 
 
-def select_hairdressers(id_salon: int):
+def select_hairdressers(id_salon: int, db_path):
     connection = sqlite3.connect(db_path)
     cursor = connection.cursor()
     cursor.execute(
@@ -120,7 +120,7 @@ def select_hairdressers(id_salon: int):
     return hairdressers
 
 
-def select_reviews(id_salon: int, id_hairdresser: int):
+def select_reviews(id_salon: int, id_hairdresser: int, db_path):
     connection = sqlite3.connect(db_path)
     cursor = connection.cursor()
     cursor.execute(
@@ -137,7 +137,7 @@ def select_reviews(id_salon: int, id_hairdresser: int):
     return reviews
 
 
-def max_id_reviews():
+def max_id_reviews(db_path):
     connection = sqlite3.connect(db_path)
     cursor = connection.cursor()
     cursor.execute("SELECT id FROM reviews")
@@ -149,10 +149,10 @@ def max_id_reviews():
     return max(ids)
 
 
-def insert_review(id_salon: int, id_hairdresser: int, text: str):
+def insert_review(id_salon: int, id_hairdresser: int, text: str, db_path):
     connection = sqlite3.connect(db_path)
     cursor = connection.cursor()
-    max_id = max_id_reviews()
+    max_id = max_id_reviews(db_path)
     cursor.execute(
         "INSERT INTO reviews (id, salon_id, hairdresser_id, text) VALUES (?, ?, ?, ?);",
         (max_id + 1, id_salon, id_hairdresser, text),
