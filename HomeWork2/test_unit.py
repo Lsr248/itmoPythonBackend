@@ -3,7 +3,6 @@ import sqlite3
 import tempfile
 
 import pytest
-
 from db import init_db, insert_data, insert_review, select_salons
 
 db_fd, db_path = tempfile.mkstemp()

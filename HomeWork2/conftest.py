@@ -1,5 +1,6 @@
 import os
 import tempfile
+
 import pytest
 from creator import create_app
 from db import init_db, insert_data
