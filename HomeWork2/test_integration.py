@@ -11,7 +11,7 @@ def test_hello(client):
 def test_show_salons(client):
     response = client.get("/hairdressingSalonsSPB/salons")
     assert response.status_code == 200
-    with open("test_show_salons.json", "r") as f:
+    with open("HomeWork2/test_show_salons.json", "r") as f:
         expected = json.load(f)
     assert response.json == expected
 

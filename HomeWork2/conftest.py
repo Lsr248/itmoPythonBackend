@@ -1,8 +1,8 @@
 import os
 import tempfile
 import pytest
-from HomeWork2.helpers.creator import create_app
-from HomeWork2.helpers.db import init_db, insert_data
+from creator import create_app
+from db import init_db, insert_data
 
 
 @pytest.fixture

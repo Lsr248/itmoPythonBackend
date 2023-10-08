@@ -4,7 +4,7 @@ import tempfile
 
 import pytest
 
-from HomeWork2.helpers.db import init_db, insert_data, insert_review, select_salons
+from db import init_db, insert_data, insert_review, select_salons
 
 db_fd, db_path = tempfile.mkstemp()
 init_db(db_path)
@@ -30,7 +30,7 @@ def test_init_db(id, result_salon):
 
 def test_select_salons():
     result = select_salons(0, "", db_path)
-    with open("test_show_salons.json", "r") as f:
+    with open("HomeWork2/test_show_salons.json", "r") as f:
         expected = json.load(f)
     assert result == expected
 

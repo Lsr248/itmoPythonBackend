@@ -1,5 +1,5 @@
-import helpers.db as db
-from helpers.creator import create_app
+import db as db
+from creator import create_app
 
 
 def main():
