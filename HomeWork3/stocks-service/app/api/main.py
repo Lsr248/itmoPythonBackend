@@ -1,7 +1,7 @@
+import uvicorn
+from db import database, engine, metadata
 from fastapi import FastAPI
 from stock import stocks
-from db import metadata, database, engine
-import uvicorn
 
 metadata.create_all(engine)
 

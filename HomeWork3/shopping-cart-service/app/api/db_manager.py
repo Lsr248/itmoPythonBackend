@@ -1,4 +1,4 @@
-from db import shopping_cart, database
+from db import database, shopping_cart
 
 
 async def get_cart(id_user: int):

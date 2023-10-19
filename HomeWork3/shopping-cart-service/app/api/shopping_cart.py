@@ -1,8 +1,7 @@
-from fastapi import APIRouter, HTTPException
-
 import db_manager
-from service import count_price, update_user_bank_count
+from fastapi import APIRouter, HTTPException
 from models import CartIn, UserIn
+from service import count_price, update_user_bank_count
 
 cart = APIRouter()
 

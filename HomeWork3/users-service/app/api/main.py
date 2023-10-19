@@ -1,27 +1,7 @@
-# from fastapi import FastAPI
-# import uvicorn
-# from api.users import users
-# from api.db import init_db
-#
-# app = FastAPI(openapi_url="/api/v1/casts/openapi.json", docs_url="/api/v1/casts/docs")
-#
-# app.include_router(users, prefix='/api/v1/users', tags=['users'])
-#
-# def main():
-#     DB_PATH = "database.sqlite"
-#     init_db(db_path=DB_PATH)
-#     host = "127.0.0.1"
-#     port = 80
-#     uvicorn.run(app, host=host, port=port)
-#
-# if __name__ == "__main__":
-#     main()
-
 import uvicorn
-from users import users
-
-from db import metadata, database, engine
+from db import database, engine, metadata
 from fastapi import FastAPI
+from users import users
 
 metadata.create_all(engine)
 

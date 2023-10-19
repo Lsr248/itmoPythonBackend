@@ -1,7 +1,6 @@
-from fastapi import APIRouter, HTTPException
-
-from models import StockOut, StockUpdate
 import db_manager
+from fastapi import APIRouter, HTTPException
+from models import StockOut, StockUpdate
 
 stocks = APIRouter()
 

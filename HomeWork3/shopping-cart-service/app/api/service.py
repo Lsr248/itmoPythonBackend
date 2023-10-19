@@ -9,7 +9,7 @@ def count_price(stocks):
     price = 0
     for stock in stocks:
         stock = int(stock)
-        price += httpx.get(f"{url}{stock}").price
+        price += httpx.get(f"{url}{stock}")["price"]
     return price
 
 
@@ -17,5 +17,5 @@ def update_user_bank_count(id_user: int, delta: int):
     url = USER_SERVICE_HOST_URL + "update/"
     httpx.post(
         f"{url}{id_user}",
-        data={"id": 1, "delta": delta},
+        json={"id": 1, "delta": delta},
     )

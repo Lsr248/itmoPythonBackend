@@ -1,7 +1,8 @@
-from sqlalchemy import Column, Integer, MetaData, String, Table, create_engine
+import sqlite3
 
 from databases import Database
-import sqlite3
+from sqlalchemy import Column, Integer, MetaData, String, Table, create_engine
+
 
 DATABASE_URI = "sqlite:///foo.db"  # os.getenv('DATABASE_URI')
 

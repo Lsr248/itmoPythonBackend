@@ -1,5 +1,5 @@
-from models import UserIn
 from db import users, database
+from models import UserIn
 
 
 async def add_user(payload: UserIn):

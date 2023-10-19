@@ -1,7 +1,7 @@
+import uvicorn
+from db import database, engine, metadata
 from fastapi import FastAPI
 from shopping_cart import cart
-from db import metadata, database, engine
-import uvicorn
 
 metadata.create_all(engine)
 

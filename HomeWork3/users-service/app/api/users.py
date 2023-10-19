@@ -1,9 +1,8 @@
 from typing import Union
 
-from fastapi import APIRouter, HTTPException
-
-from models import UserOut, UserUpdate
 import db_manager
+from fastapi import APIRouter, HTTPException
+from models import UserOut, UserUpdate
 
 users = APIRouter()
 
