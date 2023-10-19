@@ -1,17 +1,22 @@
 from fastapi import APIRouter, HTTPException
 
-from api.models import StockOut, StockIn
-from api import db_manager
+from models import StockOut, StockUpdate
+import db_manager
 
-users = APIRouter()
-@users.post('/update/{id}/', status_code=201)
-async def update_stock_count(delta: int):
-    result = await db_manager.update_stock(id, delta)
+stocks = APIRouter()
+
+
+@stocks.post("/update/", status_code=201)
+async def update_stock_count(stock: StockUpdate):
+    print(stock)
+    result = await db_manager.update_stock(stock.id, stock.count)
     if not result:
         raise HTTPException(status_code=404, detail="stock not found")
-@users.get('/{id}/', response_model=StockOut)
-async def get_user(id: int):
-    stock= await db_manager.get_stock(id)
+
+
+@stocks.get("/{id}/", response_model=StockOut)
+async def get_stock(id: int):
+    stock = await db_manager.get_stock(id)
     if not stock:
         raise HTTPException(status_code=404, detail="stock not found")
     return stock

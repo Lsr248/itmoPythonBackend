@@ -4,48 +4,46 @@ import main
 
 client = TestClient(main.app)
 
+
 @pytest.mark.parametrize(
     "id, excepted_status, expected_result",
     [
         (
             1,
             200,
-            {'bank_count': 500, 'id': 1, 'name':"David"},
+            {"count": 4, "id": 1, "name": "potato", "price": 20},
         ),
         (
             2,
             200,
-            {'bank_count': 700, 'id': 2, 'name' : "Peter"},
+            {"count": 5, "id": 2, "name": "tomato", "price": 30},
         ),
         (
-                -1,
-                404,
-                {'detail': 'User not found'},
+            -1,
+            404,
+            {"detail": "stock not found"},
         ),
     ],
 )
-def test_show_user_info(id, excepted_status, expected_result):
-    response = client.get(f"/api/v1/users/{id}")
+def test_get_stock(id, excepted_status, expected_result):
+    response = client.get(f"/api/v1/stocks/{id}")
     assert response.status_code == excepted_status
     assert response.json() == expected_result
 
 
 @pytest.mark.parametrize(
-    "insert_data, excepted_status, expected_result",
+    "insert_data, excepted_status",
     [
         (
-            {'id': 1, 'delta': 100},
+            {"id": 1, "count": 2},
             201,
-            {'bank_count': 200, 'id': 1, 'name':"David"},
         ),
         (
-            {'id': 2, 'delta': 50},
-            200,
-            {'bank_count': 700, 'id': 2, 'name' : "Peter"},
+            {"id": 2, "count": 1},
+            201,
         ),
     ],
 )
-def test_post_update(insert_data, excepted_status, expected_result):
-    response = client.post(f"/api/v1/users/update/", json = insert_data)
+def test_post_update(insert_data, excepted_status):
+    response = client.post(f"/api/v1/stocks/update/", json=insert_data)
     assert response.status_code == excepted_status
-

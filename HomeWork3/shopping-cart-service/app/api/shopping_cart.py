@@ -1,17 +1,32 @@
 from fastapi import APIRouter, HTTPException
 
-from api.models import StockOut, StockIn
-from api import db_manager
+import db_manager
+from service import count_price, update_user_bank_count
+from models import CartIn, UserIn
 
-users = APIRouter()
-@users.post('/update/{id}/', status_code=201)
-async def update_stock_count(delta: int):
-    result = await db_manager.update_stock(id, delta)
+cart = APIRouter()
+
+
+@cart.post("/remove/", status_code=201)
+async def remove_from_cart(cart: CartIn):
+    result = await db_manager.update_cart_remove(cart.id_user, cart.id_stock)
     if not result:
-        raise HTTPException(status_code=404, detail="stock not found")
-@users.get('/{id}/', response_model=StockOut)
-async def get_user(id: int):
-    stock= await db_manager.get_stock(id)
-    if not stock:
-        raise HTTPException(status_code=404, detail="stock not found")
-    return stock
+        raise HTTPException(status_code=404, detail="Please repeat")
+
+
+@cart.post("/add/", status_code=201)
+async def add_to_cart(cart: CartIn):
+    result = await db_manager.update_cart_add(cart.id_user, cart.id_stock)
+    if not result:
+        raise HTTPException(status_code=404, detail="Please repeat")
+
+
+@cart.post("/pay/", status_code=201)
+async def pay(user: UserIn):
+    stock = await db_manager.get_stock_list(user.id_user)
+    price = count_price(stock)
+    try:
+        update_user_bank_count(user.id_user, price)
+    except Exception:
+        raise HTTPException(status_code=404, detail="Please repeat")
+    return "Successful payment"

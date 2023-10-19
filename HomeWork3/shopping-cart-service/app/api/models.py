@@ -1,10 +1,10 @@
 from pydantic import BaseModel
-from typing import List, Optional
-
-class StockIn(BaseModel):
-    name: str
-    count: int = None
 
 
-class StockOut(StockIn):
-    id: int
+class CartIn(BaseModel):
+    id_user: int
+    id_stock: int
+
+
+class UserIn(BaseModel):
+    id_user: int
