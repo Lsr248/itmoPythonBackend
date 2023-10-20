@@ -1,4 +1,4 @@
-from db import stocks, database
+from db import database, stocks
 
 
 async def get_stock(id: int):

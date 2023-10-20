@@ -1,4 +1,4 @@
-from db import users, database
+from db import database, users
 from models import UserIn
 
 

@@ -4,7 +4,7 @@ from databases import Database
 from sqlalchemy import Column, Integer, MetaData, String, Table, create_engine
 
 
-DATABASE_URI = "sqlite:///foo.db"  # os.getenv('DATABASE_URI')
+DATABASE_URI = "sqlite:///foo.db"
 
 engine = create_engine(DATABASE_URI)
 metadata = MetaData()
