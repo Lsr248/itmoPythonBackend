@@ -26,7 +26,6 @@ def get_db(db_path=None):
 
 
 def init_db(db_path=None):
-    print("init_db")
     connection = get_db(db_path)
     cursor = connection.cursor()
     cursor.execute(

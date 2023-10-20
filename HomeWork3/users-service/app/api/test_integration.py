@@ -45,5 +45,5 @@ def test_get_user(id, excepted_status, expected_result):
     ],
 )
 def test_post_update(insert_data, excepted_status):
-    response = client.post(f"/api/v1/users/update/", json=insert_data)
+    response = client.post("/api/v1/users/update/", json=insert_data)
     assert response.status_code == excepted_status

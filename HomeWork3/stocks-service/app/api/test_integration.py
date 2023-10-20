@@ -26,7 +26,7 @@ client = TestClient(main.app)
     ],
 )
 def test_get_stock(id, excepted_status, expected_result):
-    response = client.get(f"/api/v1/stocks/{id}")
+    response = client.get("/api/v1/stocks/{id}")
     assert response.status_code == excepted_status
     assert response.json() == expected_result
 
@@ -45,5 +45,5 @@ def test_get_stock(id, excepted_status, expected_result):
     ],
 )
 def test_post_update(insert_data, excepted_status):
-    response = client.post(f"/api/v1/stocks/update/", json=insert_data)
+    response = client.post("/api/v1/stocks/update/", json=insert_data)
     assert response.status_code == excepted_status
