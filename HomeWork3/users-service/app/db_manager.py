@@ -1,8 +1,8 @@
 from db import database, users
-from models import UserIn
+from models import UserOut
 
 
-async def add_user(payload: UserIn):
+async def add_user(payload: UserOut):
     query = users.insert().values(**payload.dict())
 
     return await database.execute(query=query)

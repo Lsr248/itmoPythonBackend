@@ -9,11 +9,6 @@ users = APIRouter()
 
 @users.post("/update/", status_code=201)
 async def update_user_count(user: Union[UserUpdate, None]):
-    print("update")
-    print(user.id)
-    print(user.delta)
-    if user is None:
-        print("wtffff")
     result = await db_manager.update_user(user.id, user.delta)
     if not result:
         raise HTTPException(status_code=404, detail="User not found")

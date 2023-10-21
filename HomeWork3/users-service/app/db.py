@@ -39,4 +39,4 @@ def init_db(db_path=None):
     connection.commit()
 
 
-# init_db("foo.db")
+init_db("foo.db")

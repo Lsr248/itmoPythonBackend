@@ -40,7 +40,7 @@ def test_get_user(id, excepted_status, expected_result):
         ),
         (
             {"id": 2, "delta": 50},
-            200,
+            201,
         ),
     ],
 )
