@@ -1,5 +1,3 @@
-from typing import Union
-
 import db_manager
 from fastapi import APIRouter, HTTPException
 from models import UserOut, UserUpdate
@@ -8,7 +6,7 @@ users = APIRouter()
 
 
 @users.post("/update/", status_code=201)
-async def update_user_count(user: Union[UserUpdate, None]):
+async def update_user_count(user: UserUpdate):
     result = await db_manager.update_user(user.id, user.delta)
     if not result:
         raise HTTPException(status_code=404, detail="User not found")

@@ -1,6 +1,6 @@
+import pytest
 from db_manager import add_user, get_user, update_user
 from models import UserOut
-import pytest
 
 
 @pytest.mark.asyncio
