@@ -1,5 +1,5 @@
-from db_manager import get_stock, update_stock
 import pytest
+from db_manager import get_stock, update_stock
 
 
 @pytest.mark.asyncio
